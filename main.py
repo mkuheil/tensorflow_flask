@@ -140,6 +140,7 @@ def classifiy():
   myurl = request.args.get('url')
   grace_hopper = tf.keras.utils.get_file('image.jpg', myurl)
   grace_hopper = Image.open(grace_hopper).resize(IMAGE_SHAPE)
+  grace_hopper = np.array(grace_hopper)/255.0
   result = classifier.predict(grace_hopper[np.newaxis, ...])
   predicted_class = np.argmax(result[0], axis=-1)
   predicted_class_name = imagenet_labels[predicted_class]
